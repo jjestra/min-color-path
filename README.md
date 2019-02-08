@@ -24,25 +24,22 @@ run make afterwards.
 
 
 ## How to run
-	```
-	Usage ./mcp dataset [options]
-	Available datasets:{random  layered unit-disk topology roadnet union}
-	Other options: 
-	  noILP            : Don't run ILP 
-		noDijkstraBased  : Only run ILP 
-		uniformDist      : assign colors uniformly, default is normal dist 
-		-repeat K        : Repeat runs K times, default repeat 1
-	```
+```
+Usage ./mcp dataset [options]
+Available datasets:{random  layered unit-disk topology roadnet union}
+Other options: 
+  noILP            : Don't run ILP 
+	noDijkstraBased  : Only run ILP 
+	uniformDist      : assign colors uniformly, default is normal dist 
+	-repeat K        : Repeat runs K times, default repeat 1
+```
 	Some examples:
-
-`./mcp random noILP -repeat 20`   									(Run random instances 20 times without ILP)
-
-`./mcp random noILP -repeat 20 runLargeInstances`   (Run large random instances 20 times without ILP)
-
-`./mcp topology`																		(Run the topology-zoo instance)
-
-`./mcp unit-disk noILP repeat 10`										(Run the unit-disk instance)
-
+```
+./mcp random noILP -repeat 20   									(Run random instances 20 times without ILP)
+./mcp random noILP -repeat 20 runLargeInstances   (Run large random instances 20 times without ILP)
+./mcp topology																		(Run the topology-zoo instance)
+./mcp unit-disk noILP repeat 10										(Run the unit-disk instance)
+```
 ## More on Datasets
 
 + **Layered Graphs (layered):** These graphs comprise of n nodes arranged in a k × (n/k) grid.
