@@ -36,8 +36,11 @@ run make afterwards.
 	Some examples:
 
 `./mcp random noILP -repeat 20`   									(Run random instances 20 times without ILP)
+
 `./mcp random noILP -repeat 20 runLargeInstances`   (Run large random instances 20 times without ILP)
+
 `./mcp topology`																		(Run the topology-zoo instance)
+
 `./mcp unit-disk noILP repeat 10`										(Run the unit-disk instance)
 
 ## More on Datasets
