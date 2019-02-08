@@ -29,9 +29,9 @@ Usage ./mcp dataset [options]
 Available datasets:{random  layered unit-disk topology roadnet union}
 Other options: 
   noILP            : Don't run ILP 
-	noDijkstraBased  : Only run ILP 
-	uniformDist      : assign colors uniformly, default is normal dist 
-	-repeat K        : Repeat runs K times, default repeat 1
+  noDijkstraBased  : Only run ILP 
+  uniformDist      : assign colors uniformly, default is normal dist 
+  -repeat K        : Repeat runs K times, default repeat 1
 ```
 Some examples:
 
