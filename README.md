@@ -1,5 +1,5 @@
 # Min-color-path
-##Computing a minimum color path in an Edge colored graph
+## Computing a minimum color path in an Edge colored graph
 
 We study the problem of computing a min-color path in an edge-colored graph. More
 precisely, we are given a graph G = (V, E), source s, target t, an assignment χ : E → 2 C of edges
