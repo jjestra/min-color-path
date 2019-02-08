@@ -16,7 +16,11 @@ MIP solver (version 8.0.1 Academic License).
 ## Setting it up:
 Depends on [OGDF](https://github.com/ogdf/ogdf) and [Gurobi](http://www.gurobi.com/).
 Once we have both those libraries available, setting it up is straightforward : just need to
-make some minor changes in Makefile to point to your OGDF and Gurobi installations.
+make some minor changes in Makefile to point to your OGDF and Gurobi installations, and then
+run make afterwards.
+
+	`make`  (Creates an executable called `mcp`)
+
 
 
 ## How to run
