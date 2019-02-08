@@ -19,7 +19,7 @@ Once we have both those libraries available, setting it up is straightforward : 
 make some minor changes in Makefile to point to your OGDF and Gurobi installations, and then
 run make afterwards.
 
-	`make`  (Creates an executable called `mcp`)
+`make`  (Creates an executable called `mcp`)
 
 
 
@@ -35,10 +35,10 @@ run make afterwards.
 	```
 	Some examples:
 
-	`./mcp random noILP -repeat 20`   									(Run random instances 20 times without ILP)
-	`./mcp random noILP -repeat 20 runLargeInstances`   (Run large random instances 20 times without ILP)
-	`./mcp topology`																		(Run the topology-zoo instance)
-	`./mcp unit-disk noILP repeat 10`										(Run the unit-disk instance)
+`./mcp random noILP -repeat 20`   									(Run random instances 20 times without ILP)
+`./mcp random noILP -repeat 20 runLargeInstances`   (Run large random instances 20 times without ILP)
+`./mcp topology`																		(Run the topology-zoo instance)
+`./mcp unit-disk noILP repeat 10`										(Run the unit-disk instance)
 
 ## More on Datasets
 
