@@ -10,4 +10,5 @@ We design and implementtwo simple greedy heuristics for this problem, and analyz
 on an extensive set of synthetic and real world datasets. 
 From our experiments, we found that our heuristics perform significantly better
 than the best previous heuristic algorithm for the problem on all datasets, both in terms of path
-quality and the running time.
+quality and the running time. We also implement an ILP formulation for the problem using Gurobi
+MIP solver (version 8.0.1 Academic License).
