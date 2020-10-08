@@ -25,17 +25,27 @@ run make afterwards.
 
 ## How to run
 ```
-Usage ./mcp dataset [options]
-Available datasets:{random  layered unit-disk topology roadnet union}
-Other options: 
-  noILP            : Don't run ILP 
-  noDijkstraBased  : Only run ILP 
-  uniformDist      : assign colors uniformly, default is normal dist 
-  -repeat K        : Repeat runs K times, default repeat 1
+Two ways to use:
+ 
+1. Run on your own colored graph
+   (Each edge is a row of format: (see ./testdata/graph.txt for an example)
+	  vertexId vertexId  colorId
+		...
+ Usage: ./mcp readFromFile filename srcNodeId dstNodeId [options]
+
+2. Run on existing datasets
+ Usage: ./mcp dataset-name [options]
+ Available datasets:{random  layered unit-disk topology roadnet union}
+ Other options: 
+   noILP            : Don't run ILP 
+   noDijkstraBased  : Only run ILP 
+   uniformDist      : assign colors uniformly, default is normal dist 
+   -repeat K        : Repeat runs K times, default repeat 1
 ```
 Some examples:
 
 ```
+./mcp readFromFile ./testData/graph.txt 1 10      (Read from file and find min-color path between nodes 1 and 10)
 ./mcp random noILP -repeat 20                     (Run random instances 20 times without ILP)
 ./mcp random noILP -repeat 20 runLargeInstances   (Run large random instances 20 times without ILP)
 ./mcp topology                                    (Run the topology-zoo instance)
