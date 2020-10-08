@@ -13,8 +13,8 @@ than the best previous heuristic algorithm for the problem on all datasets, both
 quality and the running time. We also implement an ILP formulation for the problem using Gurobi
 MIP solver (version 8.0.1 Academic License).
 
-This code supplements the [paper](http://sud03r.github.io/papers/sea-19.pdf). The conference version
-can be found at [springer](https://link.springer.com/chapter/10.1007/978-3-030-34029-2_3)
+This code supplements the [paper](http://sud03r.github.io/papers/sea-19.pdf). The final conference version
+can be found at [springer link.](https://link.springer.com/chapter/10.1007/978-3-030-34029-2_3)
 
 ## Setting it up:
 Depends on [OGDF](https://github.com/ogdf/ogdf) and [Gurobi](http://www.gurobi.com/).
