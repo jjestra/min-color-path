@@ -5,12 +5,13 @@
 #include "LpBasedAlg.h"
 #include <ogdf/basic/Stopwatch.h>
 #include "TopologyZoo.h"
+#include "CustomColoredGraph.h"
 
 //namespace Globals {
 EdgeColoredGraph::DistributionType gDistType(EdgeColoredGraph::cGaussianDist);
 int gLimitPerEdge(3);
 static bool gLargeInstances(false);
-static bool gNoILP(false);
+static bool gNoILP(true);
 static bool gNoDijkstraBased(false);
 //}
 
@@ -171,22 +172,28 @@ void RoadNetworkGraph(WriteToLatex& wl) {
 	runAlgorithms(cg.coloredGraph(), cg.attributes(), wl, false);
 }
 
-void ReadColoredGraphFromFile(string filename, WriteToLatex& wl) {
-	EdgeColoredGraph cg;
-	GraphAttributes ga(cg.graph(), GraphAttributes::edgeLabel);
-	cg.read(filename, ga);
-	runAlgorithms(cg, ga, wl, false);
+void ReadColoredGraphFromFile(string filename, int srcId, int dstId, WriteToLatex& wl) {
+	CustomColoredGraph cg(filename, srcId, dstId);
+	cg.drawLatex(wl);
+	runAlgorithms(cg, cg.attributes(), wl, false);
 }
 
 void printHelpString(string cmd) {
-	cout << "Usage " << cmd << " dataset [options]" << endl;
-	cout << "Available datasets:" << "{random  layered unit-disk topology roadnet union}" << endl;
-	cout << "Other options: " << endl;
-	cout << "  noILP            : Don't run ILP " << endl;
-	cout << "  noDijkstraBased  : Only run ILP " << endl;
-	cout << "  uniformDist      : assign colors uniformly, default is normal dist " << endl;
-	cout << "  -repeat K        : Repeat runs K times, default repeat 1" << endl;
+	cout << "Two ways to use:" << endl;
+	cout << " 1. Run on your own colored graph" << endl;
+	cout << "   (Each edge is a row of format:) vertexId vertexId  colorId" << endl;
+	cout << " Usage: " << cmd << " readFromFile filename srcNodeId dstNodeId [options]" << endl;
+	cout << endl;
+	cout << " 2. Run on existing datasets" << endl;
+	cout << " Usage: " << cmd << " dataset-name [options]" << endl;
+	cout << " Available datasets:" << "{random  layered unit-disk topology roadnet union}" << endl;
+	cout << " Other options: " << endl;
+	cout << "   noILP            : Don't run ILP " << endl;
+	cout << "   noDijkstraBased  : Only run ILP " << endl;
+	cout << "   uniformDist      : assign colors uniformly, default is normal dist " << endl;
+	cout << "   -repeat K        : Repeat runs K times, default repeat 1" << endl;
 	cout << "Some examples: " << endl;
+	cout << " ./mcp readFromFile ./testData/graph.txt 1 10" << endl;
 	cout << " ./mcp random noILP -repeat 20" << endl;
 	cout << " ./mcp random noILP -repeat 20 runLargeInstances" << endl;
 	cout << " ./mcp topology" << endl;
@@ -203,6 +210,18 @@ int main(int argc, char* argv[])
 	string dataset = argv[1];
 	int numTimesRepeat = 1;
 	
+	// Mode 1: Reading from File
+	if (dataset == "readFromFile") {
+		if (argc < 5) {
+			std::cout << "Error: Missing Filename" << std::endl;
+			cout << "Usage: " << argv[0] << " readFromFile filename [options]" << endl;
+			return -1;
+		}
+		WriteToLatex wl;
+		ReadColoredGraphFromFile(argv[2], std::atoi(argv[3]), std::atoi(argv[4]), wl);
+		return 0;
+	}
+
 	// Disable some algorithms if the user is asking for it
 	for (int j = 2; j < argc; j++) {
 		string disableAlgs = argv[j];
@@ -234,7 +253,7 @@ int main(int argc, char* argv[])
 		else if (dataset == "topology")
 			TopologyZooGraph(wl);
 		else if (dataset == "roadnet")
-			RoadNetworkGraph(wl);
+			RoadNetworkGraph(wl);	
 		else {
 			cout << "Unknown dataset : " << dataset << ". Consider running as: " << endl;
 			printHelpString(argv[0]);

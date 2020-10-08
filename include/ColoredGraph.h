@@ -187,6 +187,7 @@ public:
 // Graph with colors on edges
 //-------------------------------
 class EdgeColoredGraph {
+protected:
 	Graph m_Graph;
 	EdgeArray<ColorSet> m_Colors;
 	node m_src;
@@ -289,7 +290,10 @@ public:
 		GraphIO::write(ga, f, wf);
 	}
 
-	void read(std::string fname, GraphAttributes& ga) {
+	// Reads from a DOT file of the following format
+	// v1 -> v2 [label = "c1"]
+	// v3 -> v2 [label = "c2"].. and so on
+	void readDOT(std::string fname, GraphAttributes& ga) {
 		std::ifstream is(fname);
 		GraphIO::readDOT(ga, m_Graph, is);
 		int maxColorId = 0;
@@ -337,7 +341,12 @@ public:
 				occ[c]++;
 		
 		// Print distribution as stars
+		cout << "Diameter: " << m_Diameter << endl;
+		cout << "Average colors per edge: " << averageColorsPerEdge() << 
+						" with distribution: " << endl; 
 		for (int i = 0; i < occ.size(); i++) {
+			if (occ[i] == 0)
+				continue;
 			cout << colorNames[i];
 			int stars = occ[i]/10;
 			for (int j = 0; j < stars; j++)
@@ -358,9 +367,8 @@ public:
 	
 	void printInfo(bool colors = true) {
 		cout << "Graph has " << m_Graph.numberOfNodes() << " vertices and " 
-				 << m_Graph.numberOfEdges() << " edges and diameter " << m_Diameter << endl;
-		cout << "Average colors per edge: " << averageColorsPerEdge() << " with distribution: " << endl; 
-		cout << "   Path from :" << m_src << " to " << m_dst << endl;
+				 << m_Graph.numberOfEdges() << " edges and " << numColors() << " colors" <<  endl;
+		cout << "   Requested path from :" << m_src << " to " << m_dst << endl;
 		cout << "   Is parallel free? : " << isParallelFree(m_Graph) << endl; 
 		cout << "   Is loop free? : " << isLoopFree(m_Graph) << endl; 
 		if (colors) printColorInfo();

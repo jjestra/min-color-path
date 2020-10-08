@@ -11,37 +11,6 @@
 extern EdgeColoredGraph::DistributionType gDistType;
 extern int gLimitPerEdge;
 
-namespace Utils {
-
-bool alignGraphToGrid(GraphAttributes& ga, int spacing, node src = NULL, node dst = NULL) {
-	const Graph& G = ga.constGraph();
-	int size = 10; // embed nodes into a 10 x j grid for drawing
-	ga.label(src) = std::to_string(src->index()); 
-	ga.label(dst) = std::to_string(dst->index()); 
-	ga.x(src) = 0;
-	ga.y(src) = ga.y(dst) = (size/2 + 1) * spacing;
-	node curr = G.firstNode()->succ();
-	int x = 1;
-	int y = 0;
-	for (node v : G.nodes) {
-		if (v == src || v == dst)
-			continue;
-		if (y == size) {
-			x++;
-			y = 0;
-		}
-		ga.x(v) = x * spacing;
-		ga.y(v) = y * spacing;
-		y++;
-		ga.label(v) = std::to_string(v->index()); 
-	}
-	if (y != 0)
-		x++;
-	ga.x(dst) = x * spacing;
-}
-
-} // end namespace Utils
-
 class RandomGraph {
 protected:
 	int m_numColors;

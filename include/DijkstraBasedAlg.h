@@ -35,6 +35,10 @@ public:
 		NodeArray<edge> pred;
 		NodeArray<int> dist;
 	  d.call(m_Graph.graph(), weights, m_Graph.src(), pred, dist);
+		if (!pred[m_Graph.dst()]) {
+			std::cout << "[**** ERROR *****]: node " << m_Graph.dst()  << 
+							" is not reachable from " << m_Graph.src() << endl;
+		}
 		Utils::getEdgesInPath(m_Graph.src(), m_Graph.dst(), pred, pathEdges);
 		//cout << " -- Min wt path so far: " << dist[m_Graph.dst()] << endl;
 		//cout << "Path: ";
